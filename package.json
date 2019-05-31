@@ -1,0 +1,23 @@
+{
+  "name": "react-starter",
+  "version": "1.0.0",
+  "description": "Starter kit",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier \"src/**/*.{js,html}\" --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pbahuk/react-starter.git"
+  },
+  "author": "Prabhat Bahukhandi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pbahuk/react-starter/issues"
+  },
+  "homepage": "https://github.com/pbahuk/react-starter#readme",
+  "devDependencies": {
+    "prettier": "^1.17.1"
+  }
+}
