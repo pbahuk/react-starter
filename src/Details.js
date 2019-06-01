@@ -1,5 +1,6 @@
 import React from "react";
 import pet from "@frontendmasters/pet";
+import Carousel from "./Carousel";
 
 class Details extends React.Component {
   state = {
@@ -25,6 +26,7 @@ class Details extends React.Component {
     } else {
       component = (
         <div className="details">
+          <Carousel photos={animal.photos} />
           <h1> {animal.name} </h1>
           <h2> {animal.type} </h2>
           <h2> {animal.contact.address.city} </h2>
