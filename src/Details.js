@@ -6,10 +6,14 @@ import ErrorBoundary from "./ErrorBoundary";
 // Context
 import ThemeContext from "./ThemeContext";
 
+// Portals.
+import Modal from "./Modal";
+
 class Details extends React.Component {
   state = {
     loading: true,
-    animal: {}
+    animal: {},
+    showModal: false
   };
 
   componentDidMount() {
@@ -20,6 +24,12 @@ class Details extends React.Component {
       });
     });
   }
+
+  toggleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  };
 
   render() {
     const { animal = {} } = this.state;
@@ -36,12 +46,24 @@ class Details extends React.Component {
           <h2> {animal.contact.address.city} </h2>
           <ThemeContext.Consumer>
             {themeHook => (
-              <button style={{ backgroundColor: themeHook[0] }}>
+              <button
+                onClick={this.toggleModal}
+                style={{ backgroundColor: themeHook[0] }}
+              >
                 Adopt {animal.name}
               </button>
             )}
           </ThemeContext.Consumer>
           <p> {animal.description} </p>
+          {this.state.showModal ? (
+            <Modal>
+              <h1> Would you like to adopt {animal.name} </h1>
+              <div className="buttons">
+                <button> Yes </button>
+                <button onClick={this.toggleModal}> No</button>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       );
     }
