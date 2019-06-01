@@ -8,6 +8,21 @@ const SearchParams = () => {
   const [animal, AnimalDropdown] = useDropdown("Animals", "dog", ANIMALS);
   const [breed, BreedDropdown, setBreed] = useDropdown("Breed", "", breeds);
 
+  /**
+   * Requesting the data for pets.
+   */
+  const [pets, setPets] = useState([]);
+  async function requestPets() {
+    const { animals } = await pet.animals({
+      location,
+      breed,
+      type: animal
+    });
+
+    console.log(animals);
+    setPets(animals || []);
+  }
+
   useEffect(() => {
     setBreeds([]);
     setBreed("");
@@ -20,7 +35,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         <label htmlFor="location">
           Location
           <input
