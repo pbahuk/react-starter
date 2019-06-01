@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropdown from "./useDropdown";
 import Results from "./Results";
+
+// Context: ThemeContext
+import ThemeContext from "./ThemeContext";
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
@@ -13,7 +16,6 @@ const SearchParams = () => {
    * Requesting the data for pets.
    */
   const [pets, setPets] = useState([]);
-  console.log("pets:", pets);
   async function requestPets() {
     const { animals } = await pet.animals({
       location,
@@ -34,6 +36,11 @@ const SearchParams = () => {
     }, console.error);
   }, [animal, setBreed, setBreeds]);
 
+  /**
+   * Context: Using the theme.
+   */
+  const [theme, setTheme] = useContext(ThemeContext);
+
   return (
     <div className="search-params">
       <form
@@ -53,7 +60,22 @@ const SearchParams = () => {
         </label>
         <AnimalDropdown />
         <BreedDropdown />
-        <button> Submit </button>
+        <label htmlFor="theme">
+          Theme
+          <select
+            id="theme"
+            value={theme}
+            onChange={e => setTheme(e.target.value)}
+            onBlur={e => setTheme(e.target.value)}
+          >
+            {["peru", "darkblue", "mediumorchid", "chartreuse"].map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button style={{ backgroundColor: theme }}> Submit </button>
       </form>
       <Results pets={pets} />
     </div>

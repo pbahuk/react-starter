@@ -3,6 +3,9 @@ import pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 
+// Context
+import ThemeContext from "./ThemeContext";
+
 class Details extends React.Component {
   state = {
     loading: true,
@@ -10,7 +13,6 @@ class Details extends React.Component {
   };
 
   componentDidMount() {
-    throw new Error("Smaple Error");
     pet.animal(this.props.id).then(({ animal }) => {
       this.setState({
         loading: false,
@@ -32,7 +34,13 @@ class Details extends React.Component {
           <h1> {animal.name} </h1>
           <h2> {animal.type} </h2>
           <h2> {animal.contact.address.city} </h2>
-          <button> {`Adopt ${animal.name}`} </button>
+          <ThemeContext.Consumer>
+            {themeHook => (
+              <button style={{ backgroundColor: themeHook[0] }}>
+                Adopt {animal.name}
+              </button>
+            )}
+          </ThemeContext.Consumer>
           <p> {animal.description} </p>
         </div>
       );

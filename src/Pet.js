@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 export const Pet = props => {
   const { name, gender, description, photos = [], id } = props.pet;
@@ -8,7 +9,7 @@ export const Pet = props => {
   }
 
   return (
-    <a href={`/details/${id}`} className="pet">
+    <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
         <img src={hero} alt={name} />
       </div>
@@ -18,6 +19,6 @@ export const Pet = props => {
           {gender}: {description}
         </h2>
       </div>
-    </a>
+    </Link>
   );
 };
