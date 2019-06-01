@@ -1,34 +1,33 @@
-// Writing Pure React here.
 import React from "react";
 import { render } from "react-dom";
-
-const Pet = props => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, props.name),
-    React.createElement("h2", {}, props.animal),
-    React.createElement("h2", {}, props.breed)
-  ]);
-};
+import { Pet } from "./Pet";
+const data = [
+  {
+    name: "Luna",
+    animal: "Dog",
+    breed: "Havanese"
+  },
+  {
+    name: "Pepper",
+    animal: "Bird",
+    breed: "Cockteil"
+  },
+  {
+    name: "Doink",
+    animal: "Cat",
+    breed: "Mixed"
+  }
+];
 
 const App = () => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, "Adopt Me"),
-    React.createElement(Pet, {
-      name: "Luna",
-      animal: "Dog",
-      breed: "Havanese"
-    }),
-    React.createElement(Pet, {
-      name: "Pepper",
-      animal: "Bird",
-      breed: "Cockteil"
-    }),
-    React.createElement(Pet, {
-      name: "Doink",
-      animal: "Cat",
-      breed: "Mixed"
-    })
-  ]);
+  return (
+    <div>
+      <h1> Adopt Me </h1>
+      {data.map(pet => (
+        <Pet name={pet.name} animal={pet.animal} breed={pet.breed} />
+      ))}
+    </div>
+  );
 };
 
 render(React.createElement(App), document.getElementById("root"));
