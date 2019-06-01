@@ -1,7 +1,6 @@
 import React from "react";
 
 export const Pet = props => {
-  console.log("Hello");
   return (
     <div>
       <h1>{props.name}</h1>
