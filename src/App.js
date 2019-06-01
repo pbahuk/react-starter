@@ -23,11 +23,11 @@ const App = () => {
   return (
     <div>
       <h1> Adopt Me </h1>
-      {data.map(pet => (
-        <Pet name={pet.name} animal={pet.animal} breed={pet.breed} />
+      {data.map((pet, key) => (
+        <Pet key={key} name={pet.name} animal={pet.animal} breed={pet.breed} />
       ))}
     </div>
   );
 };
 
-render(React.createElement(App), document.getElementById("root"));
+render(<App />, document.getElementById("root"));
