@@ -7,8 +7,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
 
 // Portals. Changing Modals to lazily loaded.
-// import Modal from "./Modal";
-const Modal = lazy(() => import("./Modal"));
+import Modal from "./Modal";
 
 class Details extends React.Component {
   state = {
@@ -34,10 +33,11 @@ class Details extends React.Component {
 
   render() {
     const { animal = {} } = this.state;
+    console.log("Coming in");
 
     let component = null;
     if (this.state.loading) {
-      component = <div> Loading ...</div>;
+      component = <div> Loading ...........</div>;
     } else {
       component = (
         <div className="details">
