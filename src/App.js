@@ -8,6 +8,7 @@ import Details from "./Details";
 
 // Context
 import ThemeContext from "./ThemeContext";
+import Hooks from "./hooks";
 
 const App = () => {
   const themeHook = useState("darkblue");
@@ -20,6 +21,7 @@ const App = () => {
         <Router>
           <SearchParams path="/" />
           <Details path="details/:id" />
+          <Hooks path="hooks" />
         </Router>
       </div>
     </ThemeContext.Provider>
