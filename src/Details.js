@@ -3,11 +3,9 @@ import pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 
-// Context
-import ThemeContext from "./ThemeContext";
-
 // Portals. Changing Modals to lazily loaded.
 import Modal from "./Modal";
+import { connect } from "react-redux";
 
 class Details extends React.Component {
   state = {
@@ -45,16 +43,12 @@ class Details extends React.Component {
           <h1> {animal.name} </h1>
           <h2> {animal.type} </h2>
           <h2> {animal.contact.address.city} </h2>
-          <ThemeContext.Consumer>
-            {themeHook => (
-              <button
-                onClick={this.toggleModal}
-                style={{ backgroundColor: themeHook[0] }}
-              >
-                Adopt {animal.name}
-              </button>
-            )}
-          </ThemeContext.Consumer>
+          <button
+            onClick={this.toggleModal}
+            style={{ backgroundColor: this.props.theme }}
+          >
+            Adopt {animal.name}
+          </button>
           <p> {animal.description} </p>
           {this.state.showModal ? (
             <Modal>
@@ -72,10 +66,14 @@ class Details extends React.Component {
   }
 }
 
+const mapStateToProps = ({ theme }) => ({ theme });
+
+const WrappedDetails = connect(mapStateToProps)(Details);
+
 export default function DetailsWithErrorBoundary(props) {
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <WrappedDetails {...props} />
     </ErrorBoundary>
   );
 }

@@ -41,8 +41,11 @@
     "@frontendmasters/pet": "^1.0.3",
     "@reach/router": "^1.2.1",
     "express": "^4.17.1",
+    "http2": "^3.3.7",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1"
   },
   "browserslist": [
     "last 2 Chrome versions",

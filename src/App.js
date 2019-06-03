@@ -1,36 +1,27 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense } from "react";
 import SearchParams from "./SearchParams";
-
-// Router
 import { Router, Link } from "@reach/router";
+const Details = lazy(() => import("./Details"));
 
-// Context
-import ThemeContext from "./ThemeContext";
-
-// Code Splitting
-// const Details = lazy(() => import("./Details"));
-import Details from "./Details";
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
 
 const App = () => {
-  const themeHook = useState("darkblue");
   return (
-    <ThemeContext.Provider value={themeHook}>
+    <Provider store={store}>
       <div>
         <header>
           <Link to="/"> Adopt Me </Link>
         </header>
-        {/* <Suspense fallback={<h1> Loading Route... </h1>}>
+        <Suspense fallback={<h1> Loading Route... </h1>}>
           <Router>
             <SearchParams path="/" />
             <Details path="details/:id" />
           </Router>
-        </Suspense> */}
-        <Router>
-          <SearchParams path="/" />
-          <Details path="details/:id" />
-        </Router>
+        </Suspense>
       </div>
-    </ThemeContext.Provider>
+    </Provider>
   );
 };
 
